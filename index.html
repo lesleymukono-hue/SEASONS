@@ -42,11 +42,6 @@ header{
     backdrop-filter:blur(12px);
 }
 
-.logo{
-    width:120px;
-    height:auto;
-} 
-
 .logo-container{
     display:flex;
     align-items:center;
@@ -83,14 +78,13 @@ nav a{
     transition:.3s;
 }
 
-nav a:hover{
+nav a:hover,
+nav a.active{
     background:#d4af37;
     color:#000;
 }
 
 nav a.active{
-    background:#d4af37;
-    color:#000;
     box-shadow:0 8px 20px rgba(212,175,55,0.6);
 }
 
@@ -137,15 +131,11 @@ nav a.active{
     font-size:10px;
     font-weight:600;
     color:#fff;
-
     background:rgba(0,0,0,0.45);
     backdrop-filter:blur(10px);
-
     border:2px solid rgba(255,255,255,0.2);
     border-radius:40px;
-
     box-shadow:0 8px 20px rgba(0,0,0,0.4);
-
     transition:all .3s ease;
 }
 
@@ -190,15 +180,6 @@ nav a.active{
     font-size:35px;
     margin:20px 0;
 }
-.hero h1{
-    font-size:85px;
-    letter-spacing:8px;
-}
-
-.hero p{
-    margin:20px 0;
-    font-size:50px;
-}
 
 .btn{
     display:inline-block;
@@ -212,6 +193,25 @@ nav a.active{
 
 .btn:hover{
     background:#5f5959;
+}
+
+.add-cart{
+    width:100%;
+    margin-top:15px;
+    padding:14px;
+    border:none;
+    border-radius:30px;
+    background:#d4af37;
+    color:#000;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.add-cart:hover{
+    background:white;
+    transform:translateY(-3px);
 }
 
 section{
@@ -247,9 +247,6 @@ section{
     width:100%;
     height:340px;
     object-fit:cover;
-}
-
-.card img{
     transition:.4s;
 }
 
@@ -272,7 +269,6 @@ section{
 }
 
 /* CUSTOMER GALLERY */
-
 .customer-gallery{
     padding:80px 8%;
     background:#111;
@@ -323,7 +319,7 @@ section{
 .about img{
     width:80%;
     border-radius:20px;
-   }
+}
 
 .about p{
     line-height:2.5;
@@ -357,6 +353,7 @@ section{
     cursor:pointer;
     font-size:16px;
 }
+
 /* Floating Social Icons */
 .floating-social {
     position: fixed;
@@ -386,23 +383,10 @@ section{
     transform: scale(1.15);
 }
 
-/* Brand Colors */
-.whatsapp {
-    background: #25D366;
-}
+.whatsapp { background: #25D366; }
+.instagram { background: linear-gradient(45deg, #FEDA75, #FA7E1E, #D62976, #962FBF, #4F5BD5); }
+.tiktok { background: #000; }
 
-.instagram {
-    background: linear-gradient(45deg,
-        #FEDA75,
-        #FA7E1E,
-        #D62976,
-        #962FBF,
-        #4F5BD5);
-}
-
-.tiktok {
-    background: #000;
-}
 footer{
     background:#000000;
     color:#ffffff;
@@ -411,26 +395,14 @@ footer{
 }
 
 @media(max-width:768px){
-
-header{
-    flex-direction:column;
+    header{ flex-direction:column; }
+    nav{ margin-top:15px; }
+    .hero-text h1{ font-size:45px; }
+    .about{ grid-template-columns:1fr; }
+    .contact input, .contact textarea{ width:85%; }
 }
 
-nav{
-    margin-top:15px;
-}
-
-.hero h1{
-    font-size:45px;
-}
-
-.about{
-    grid-template-columns:1fr;
-}
-
-}
 /* Lightbox */
-
 .lightbox{
     display:none;
     position:fixed;
@@ -461,19 +433,14 @@ nav{
 }
 
 @keyframes zoom{
-    from{
-        transform:scale(.5);
-        opacity:0;
-    }
-    to{
-        transform:scale(1);
-        opacity:1;
-    }
+    from{ transform:scale(.5); opacity:0; }
+    to{ transform:scale(1); opacity:1; }
 }
 
 .product-image{
     cursor:pointer;
 }
+
 .footer-container{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -496,556 +463,566 @@ nav{
 .footer-section a:hover{
     color:#d4af37;
 }
-</style>
 
+/* SHOPPING CART */
+.cart-icon{
+    position:fixed;
+    top:60%;
+    right:25px;
+    transform:translateY(-50%);
+    width:70px;
+    height:70px;
+    background:#d4af37;
+    color:#000;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    font-size:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.4);
+    z-index:3000;
+    transition:.3s;
+}
+
+.cart-icon:hover{
+    transform:translateY(-50%) scale(1.1);
+}
+
+#cart-count{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    width:28px;
+    height:28px;
+    background:red;
+    color:white;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.cart-panel{
+    position:fixed;
+    top:0;
+    right:-420px;
+    width:400px;
+    height:100vh;
+    background:#111;
+    color:white;
+    z-index:4000;
+    display:flex;
+    flex-direction:column;
+    transition:right .45s ease;
+}
+
+.cart-panel.active{
+    right:0;
+}
+
+.cart-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:25px;
+    border-bottom:1px solid #333;
+}
+
+.close-cart{
+    font-size:38px;
+    cursor:pointer;
+}
+
+.cart-items{
+    flex:1;
+    overflow-y:auto;
+    padding:20px;
+}
+
+.empty-cart{
+    text-align:center;
+    color:#999;
+    margin-top:80px;
+}
+
+.cart-footer{
+    padding:25px;
+    border-top:1px solid #333;
+}
+
+.checkout-btn{
+    width:100%;
+    margin-top:15px;
+    padding:16px;
+    border:none;
+    border-radius:40px;
+    background:#d4af37;
+    color:#000;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.checkout-btn:hover{
+    background:white;
+}
+
+.cart-item{
+    display:flex;
+    gap:15px;
+    margin-bottom:20px;
+    align-items:center;
+    border-bottom:1px solid #333;
+    padding-bottom:15px;
+}
+
+.cart-item img{
+    width:70px;
+    height:70px;
+    border-radius:10px;
+    object-fit:cover;
+}
+
+.cart-item h4{
+    margin-bottom:6px;
+    font-size:17px;
+}
+
+.cart-item p{
+    color:#d4af37;
+    font-weight:bold;
+}
+
+.cart-details{
+    flex:1;
+}
+
+.quantity{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:10px;
+}
+
+.quantity button{
+    width:32px;
+    height:32px;
+    border:none;
+    border-radius:50%;
+    background:#d4af37;
+    color:#000;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.quantity button:hover{
+    background:white;
+}
+
+.quantity span{
+    min-width:20px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.remove-btn{
+    margin-top:12px;
+    padding:8px 16px;
+    border:none;
+    border-radius:20px;
+    background:#ff3b30;
+    color:white;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.remove-btn:hover{
+    background:#cc2d25;
+}
+
+/* TOAST MESSAGE */
+.toast{
+    position:fixed;
+    bottom:40px;
+    left:50%;
+    transform:translateX(-50%) translateY(100px);
+    background:#d4af37;
+    color:#000;
+    padding:15px 30px;
+    border-radius:40px;
+    font-size:18px;
+    font-weight:bold;
+    box-shadow:0 10px 25px rgba(0,0,0,.35);
+    opacity:0;
+    transition:.4s;
+    z-index:9999;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+.customer-info{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.customer-info input,
+.customer-info textarea{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#222;
+    color:white;
+    font-size:15px;
+}
+
+.customer-info input::placeholder,
+.customer-info textarea::placeholder{
+    color:#aaa;
+}
+
+.contact-list {
+    list-style: none;
+    padding: 20px 0;
+}
+
+.contact-list li {
+    margin: 10px 0;
+}
+
+.contact-list a {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+}
+</style>
 </head>
 <body>
-     <div class="announcement-bar">
+
+    <div class="announcement-bar">
         🚚 FREE DELIVERY ON ORDERS OVER $50 • NEW ARRIVALS AVAILABLE NOW • SHOP TODAY
     </div>
 
+    <section class="hero" id="home">
+        <nav class="hero-nav">
+            <a href="#home">Home</a>
+            <a href="#shop">Shop</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="hero-header">
+            <div class="logo-container">
+                <img src="images/blacklogo.jpg" class="logo" alt="Seasons Black Logo">
+                <img src="images/whitelogo.jpg" class="logo" alt="Seasons White Logo">
+            </div>
+        </div>
 
-<section class="hero" id="home">
-     <nav class="hero-nav">
-        <a href="#home">Home</a>
-        <a href="#shop">Shop</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-    </nav>
-    <div class="hero-header">
+        <div class="slides fade active">
+            <img src="images/hero1.jpg" alt="Hero 1">
+        </div>
+        <div class="slides fade">
+            <img src="images/hero2.jpg" alt="Hero 2">
+        </div>
+        <div class="slides fade">
+            <img src="images/hero3.jpg" alt="Hero 3">
+        </div>
 
-    <div class="logo-container">
-        <img src="images/blacklogo.jpg" class="logo">
-        <img src="images/whitelogo.jpg" class="logo">
+        <div class="hero-text">
+            <h1>SEASONS</h1>
+            <p>Premium Streetwear Collection</p>
+            <a href="#shop" class="btn">Shop Collection</a>
+        </div>
+    </section>
+
+    <section id="shop">
+        <u><h2 class="title">Welcome to SEASONS Shop Collection</h2></u>
+
+        <div class="products">
+            <div class="card">
+                <img src="images/GirlsCrops2.jpg" class="product-image" onclick="openLightbox(this)" alt="SEASONS Crop Top">
+                <div class="card-content">
+                    <h3>SEASONS Crop Top</h3>
+                    <p>Minimal everyday comfort.</p>
+                    <p class="price">$10.00</p>
+                    <button class="add-cart" onclick="addToCart('SEASONS Crop Top (Variant 1)', 10, 'images/GirlsCrops2.jpg')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="images/GirlsCrops.jpg" class="product-image" onclick="openLightbox(this)" alt="SEASONS Crop Top">
+                <div class="card-content">
+                    <h3>SEASONS Crop Top</h3>
+                    <p>Minimal everyday comfort.</p>
+                    <p class="price">$10.00</p>
+                    <button class="add-cart" onclick="addToCart('SEASONS Crop Top (Variant 2)', 10, 'images/GirlsCrops.jpg')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="images/OPENgirlsCrop.jpg" class="product-image" onclick="openLightbox(this)" alt="OPEN GIRLS Crop Top">
+                <div class="card-content">
+                    <h3>OPEN GIRLS Crop Top</h3>
+                    <p>Minimal everyday comfort.</p>
+                    <p class="price">$10.00</p>
+                    <button class="add-cart" onclick="addToCart('OPEN GIRLS Crop Top', 10, 'images/OPENgirlsCrop.jpg')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="images/BoysWhiteTees.jpg" class="product-image" onclick="openLightbox(this)" alt="SEASONS White Tees">
+                <div class="card-content">
+                    <h3>SEASONS White Tees</h3>
+                    <p>Timeless street style.</p>
+                    <p class="price">$15.00</p>
+                    <button class="add-cart" onclick="addToCart('SEASONS White Tees', 15, 'images/BoysWhiteTees.jpg')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="images/BoysBlackTees.jpg" class="product-image" onclick="openLightbox(this)" alt="SEASONS Black Tees">
+                <div class="card-content">
+                    <h3>SEASONS Black Tees</h3>
+                    <p>Timeless street style.</p>
+                    <p class="price">$15.00</p>
+                    <button class="add-cart" onclick="addToCart('SEASONS Black Tees', 15, 'images/BoysBlackTees.jpg')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="images/WhiteGirlsOPENSSS.jpg" class="product-image" onclick="openLightbox(this)" alt="GIRLS OPEN SEASON Tees">
+                <div class="card-content">
+                    <h3>GIRLS OPEN SEASON Tees</h3>
+                    <p>Timeless street style.</p>
+                    <p class="price">$15.00</p>
+                    <button class="add-cart" onclick="addToCart('GIRLS OPEN SEASON Tees (White)', 15, 'images/WhiteGirlsOPENSSS.jpg')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="images/BlackGirlsOPENSSS.jpg" class="product-image" onclick="openLightbox(this)" alt="GIRLS OPEN SEASON Tees">
+                <div class="card-content">
+                    <h3>GIRLS OPEN SEASON Tees</h3>
+                    <p>Timeless street style.</p>
+                    <p class="price">$15.00</p>
+                    <button class="add-cart" onclick="addToCart('GIRLS OPEN SEASON Tees (Black)', 15, 'images/BlackGirlsOPENSSS.jpg')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="images/WhiteTees.jpg" class="product-image" onclick="openLightbox(this)" alt="BOYS OPEN SEASON Tees">
+                <div class="card-content">
+                    <h3>BOYS OPEN SEASON Tees</h3>
+                    <p>Timeless street style.</p>
+                    <p class="price">$15.00</p>
+                    <button class="add-cart" onclick="addToCart('BOYS OPEN SEASON Tees (White)', 15, 'images/WhiteTees.jpg')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="images/TeesSSS.jpg" class="product-image" onclick="openLightbox(this)" alt="BOYS OPEN SEASON Tees">
+                <div class="card-content">
+                    <h3>BOYS OPEN SEASON Tees</h3>
+                    <p>Timeless street style.</p>
+                    <p class="price">$15.00</p>
+                    <button class="add-cart" onclick="addToCart('BOYS OPEN SEASON Tees', 15, 'images/TeesSSS.jpg')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="images/SSSJersey.jpg" class="product-image" onclick="openLightbox(this)" alt="SEASONS JERSEY">
+                <div class="card-content">
+                    <h3>SEASONS JERSEY</h3>
+                    <p>Timeless street style.</p>
+                    <p class="price">$15.00</p>
+                    <button class="add-cart" onclick="addToCart('SEASONS JERSEY', 15, 'images/SSSJersey.jpg')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="images/Hoodie.jpg" class="product-image" onclick="openLightbox(this)" alt="Black Shadow Hoodie">
+                <div class="card-content">
+                    <h3>Black Shadow Hoodie</h3>
+                    <p>Warm. Stylish. Premium.</p>
+                    <p class="price">$25.00</p>
+                    <button class="add-cart" onclick="addToCart('Black Shadow Hoodie', 25, 'images/Hoodie.jpg')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="images/BAADDAY.jpg" class="product-image" onclick="openLightbox(this)" alt="BAADDAY OUTFIT">
+                <div class="card-content">
+                    <h3>BAADDAY OUTFIT</h3>
+                    <p>Fit for every SEASON.</p>
+                    <p class="price">$60.00</p>
+                    <button class="add-cart" onclick="addToCart('BAADDAY OUTFIT', 60, 'images/BAADDAY.jpg')">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CUSTOMER GALLERY -->
+    <section id="gallery" class="customer-gallery">
+        <h2>SEASONS Community</h2>
+        <p>Our customers wearing SEASONS.</p>
+
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="images/customers/crops1.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/crops3.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/crops4.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/crops5.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/tees/t2.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/tees/t3.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/tees/t5.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/tees/t7.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/tees/t8.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/tees/t9.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/tees/t10.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/tees/t16.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/tees/t17.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/tees/t20.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/hoodies/h1.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/hoodies/h4.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/hoodies/h6.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/hoodies/h7.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/hoodies/h10.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/hoodies/h12.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/hoodies/h13.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/hoodies/h14.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/hoodies/h16.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/hoodies/h17.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/tracksuit/o1.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/tracksuit/o5.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/tracksuit/o2.jpg" alt="Customer Gallery"></div> 
+            <div class="gallery-item"><img src="images/customers/tracksuit/t1.jpg" alt="Customer Gallery"></div>
+            <div class="gallery-item"><img src="images/customers/tracksuit/t2.jpg" alt="Customer Gallery"></div> 
+            <div class="gallery-item"><img src="images/customers/tracksuit/t3.jpg" alt="Customer Gallery"></div> 
+            <div class="gallery-item"><img src="images/customers/tracksuit/t6.jpg" alt="Customer Gallery"></div> 
+            <div class="gallery-item"><img src="images/customers/tracksuit/t7.jpg" alt="Customer Gallery"></div> 
+        </div>
+    </section>
+
+    <section id="about">
+        <u><h2 class="title">Our Story</h2></u>
+        <div class="about">
+            <img src="images/SSScartoon.jpg" alt="SEASONS Illustration">
+            <div>
+                <p>SEASONS creates premium clothing inspired by the changing seasons and modern lifestyles. Our collections blend comfort, quality and timeless design so every piece feels as good as it looks.</p>
+                <br>
+                <p>Whether it's summer essentials, autumn layers, winter warmth or spring freshness, SEASONS is designed to fit every moment.</p>
+                <br>
+                <p>If you are interested in any of our products, kindly list the products you want and send a message to any of our social media pages and we will respond to you in no time. Thank You.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <u><h2 class="title">Contact Us</h2></u>
+        <form onsubmit="event.preventDefault();">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Email" required>
+            <textarea rows="5" placeholder="Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+
+        <br>
+        <div class="card" style="padding: 20px;">
+            <p><u>You can also contact us on:</u></p>
+            <ul class="contact-list">
+                <li><a href="https://wa.me/263775324744" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp: +263 77 532 4744</a></li>
+                <li><a href="https://www.tiktok.com/@seasonsclothin" target="_blank"><i class="fab fa-tiktok"></i> TikTok: @seasonsclothin</a></li>
+                <li><a href="https://www.instagram.com/sss_seasons/" target="_blank"><i class="fab fa-instagram"></i> Instagram: @sss_seasons</a></li>
+                <li><a href="https://www.instagram.com/3easons_sss/" target="_blank"><i class="fab fa-instagram"></i> Instagram: @3easons_sss</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="newsletter" style="text-align: center;">
+        <h2>Join the SEASONS Community</h2>
+        <p>Get updates on new drops and exclusive offers.</p>
+        <div style="margin-top: 15px;">
+            <input type="email" placeholder="Your email" style="padding: 12px; border-radius: 10px; border: none; font-size: 16px;">
+            <button style="padding: 12px 25px; border-radius: 10px; border: none; background: #d4af37; font-weight: bold; cursor: pointer;">Subscribe</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3><u>Legal:</u></h3>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+
+            <div class="footer-section">
+                <h3><u>Follow Us On:</u></h3>
+                <a href="https://www.instagram.com/sss_seasons/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://www.instagram.com/3easons_sss/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://www.tiktok.com/@seasonsclothin" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+                <a href="https://wa.me/263775324744" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">© 2026 SEASONS. All Rights Reserved.</p>
+    </footer>
+
+    <!-- SHOPPING CART -->
+    <div class="cart-icon" onclick="toggleCart()">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
     </div>
 
-    
+    <div id="cart-panel" class="cart-panel">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <span class="close-cart" onclick="toggleCart()">&times;</span>
+        </div>
 
-</div>
+        <div id="cart-items" class="cart-items">
+            <p class="empty-cart">Your cart is empty.</p>
+        </div>
 
-    <div class="slides fade active">
-        <img src="images/hero1.jpg" alt="Hero 1">
+        <div class="cart-footer">
+            <h3>Total: <span id="cart-total">$0.00</span></h3>
+
+            <div class="customer-info">
+                <input type="text" id="customer-name" placeholder="Your Name">
+                <input type="text" id="customer-phone" placeholder="Phone Number">
+                <textarea id="customer-address" placeholder="Delivery Address" rows="3"></textarea>
+            </div>
+
+            <button class="checkout-btn" onclick="checkoutWhatsApp()">Checkout via WhatsApp</button>
+        </div>
     </div>
 
-    <div class="slides fade">
-        <img src="images/hero2.jpg" alt="Hero 2">
+    <div class="floating-social">
+        <a href="https://wa.me/263775324744" target="_blank" class="whatsapp" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://www.instagram.com/sss_seasons/" target="_blank" class="instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.instagram.com/3easons_sss/" target="_blank" class="instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@seasonsclothin" target="_blank" class="tiktok" title="TikTok"><i class="fab fa-tiktok"></i></a>
     </div>
 
-    <div class="slides fade">
-        <img src="images/hero3.jpg" alt="Hero 3">
+    <!-- CART NOTIFICATION & LIGHTBOX -->
+    <div id="toast" class="toast">✅ Added to Cart</div>
+
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" alt="Enlarged view">
     </div>
 
-    <div class="hero-text">
-        <h1></h1>
-        <p></p>
-        <a href="#shop" class="btn">Shop Collection</a>
-    </div>
-
-</section>
-
-
-
-<section id="shop">
-
-<u><h2 class="title">Welcome to SEASONS Shop Collection</h2></u>
-
-<div class="products">
-
-    <div class="card">
-    <img src="images/GirlsCrops2.jpg"
-         class="product-image"
-         onclick="openLightbox(this)"
-         alt="GirlsCrops2">
-
-    <div class="card-content">
-        <h3>SEASONS Crop Top</h3>
-<p>Minimal everyday comfort.</p>
-<p class="price">$10.00</p>
-    </div>
-</div>
-
-  
-
-<div class="card">
-    <img src="images/GirlsCrops.jpg"
-         class="product-image"
-         onclick="openLightbox(this)"
-         alt="GirlsCrops">
-
-<div class="card-content">
-<h3>SEASONS Crop Top</h3>
-<p>Minimal everyday comfort.</p>
-<p class="price">$10.00</p>
-</div>
-</div>
-
-
-
-<div class="card">
-    <img src="images/OPENgirlsCrop.jpg"
-         class="product-image"
-         onclick="openLightbox(this)"
-         alt="OPENgirlsCrop">
-
-<div class="card-content">
-<h3>OPEN GIRLS Crop Top</h3>
-<p>Minimal everyday comfort.</p>
-<p class="price">$10.00</p>
-</div>
-</div>
-
-
-
-<div class="card">
-    <img src="images/BoysWhiteTees.jpg"
-         class="product-image"
-         onclick="openLightbox(this)"
-         alt="BoysWhiteTees">
-
-<div class="card-content">
-<h3>SEASONS White Tees</h3>
-<p>Timeless street style.</p>
-<p class="price">$15.00</p>
-</div>
-</div>
-
-
-
-<div class="card">
-    <img src="images/BoysBlackTees.jpg"
-         class="product-image"
-         onclick="openLightbox(this)"
-         alt="BoysBlackTees">
-
-<div class="card-content">
-<h3>SEASONS Black Tees</h3>
-<p>Timeless street style.</p>
-<p class="price">$15.00</p>
-</div>
-</div>
-
-
-
-<div class="card">
-    <img src="images/WhiteGirlsOPENSSS.jpg"
-         class="product-image"
-         onclick="openLightbox(this)"
-         alt="WhiteGirlsOPENSSS">
-
-<div class="card-content">
-<h3>GIRLS OPEN SEASON Tees</h3>
-<p>Timeless street style.</p>
-<p class="price">$15.00</p>
-</div>
-</div>
-
-
-
-<div class="card">
-    <img src="images/BlackGirlsOPENSSS.jpg"
-         class="product-image"
-         onclick="openLightbox(this)"
-         alt="BlackGirlsOPENSSS">
-
-<div class="card-content">
-<h3>GIRLS OPEN SEASON Tees</h3>
-<p>Timeless street style.</p>
-<p class="price">$15.00</p>
-</div>
-</div>
-
-
-
-<div class="card">
-    <img src="images/WhiteTees.jpg"
-         class="product-image"
-         onclick="openLightbox(this)"
-         alt="WhiteTees">
-
-<div class="card-content">
-<h3>BOYS OPEN SEASON Tees</h3>
-<p>Timeless street style.</p>
-<p class="price">$15.00</p>
-</div>
-</div>
-
-
-
-<div class="card">
-    <img src="images/TeesSSS.jpg"
-         class="product-image"
-         onclick="openLightbox(this)"
-         alt="TeesSSS">
-
-<div class="card-content">
-<h3>BOYS OPEN SEASON Tees</h3>
-<p>Timeless street style.</p>
-<p class="price">$15.00</p>
-</div>
-</div>
-
-
-
-<div class="card">
-    <img src="images/SSSJersey.jpg"
-         class="product-image"
-         onclick="openLightbox(this)"
-         alt="SSSJersey">
-
-<div class="card-content">
-<h3>SEASONS JERSEY</h3>
-<p>Timeless street style.</p>
-<p class="price">$15.00</p>
-</div>
-</div>
-
-
-
-<div class="card">
-    <img src="images/Hoodie.jpg"
-         class="product-image"
-         onclick="openLightbox(this)"
-         alt="Hoodie">
-
-<div class="card-content">
-<h3>Black Shadow Hoodie</h3>
-<p>Warm. Stylish. Premium.</p>
-<p class="price">$25.00</p>
-</div>
-</div>
-
-
-<div class="card">
-    <img src="images/BAADDAY.jpg"
-         class="product-image"
-         onclick="openLightbox(this)"
-         alt="BAADDAY">
-
-<div class="card-content">
-<h3>BAADDAY OUTFIT</h3>
-<p>Fit for every SEASON.</p>
-<p class="price">$60.00</p>
-</div>
-</div>
-
-</div>
-
-</section>
-
-<!-- CUSTOMER GALLERY -->
-<section id="gallery" class="customer-gallery">
-
-    <h2>SEASONS Community</h2>
-    <p>Our customers wearing SEASONS.</p>
-
-    <div class="gallery-grid">
-
-        <div class="gallery-item">
-            <img src="images/customers/crops1.jpg" alt="Customer 2">
-        </div>
-
-        <div class="gallery-item">
-            <img src="images/customers/crops3.jpg" alt="Customer 4">
-        </div>
-
-        <div class="gallery-item">
-            <img src="images/customers/crops4.jpg" alt="Customer 5">
-        </div>
-
-        <div class="gallery-item">
-            <img src="images/customers/crops5.jpg" alt="Customer 6">
-        </div>
-
-
-
-        <div class="gallery-item">
-            <img src="images/customers/tees/t2.jpg" alt="Customer 6">
-        </div>
-        
-        <div class="gallery-item">
-            <img src="images/customers/tees/t3.jpg" alt="Customer 6">
-        </div>
-                
-        <div class="gallery-item">
-            <img src="images/customers/tees/t5.jpg" alt="Customer 6">
-        </div>
-        
-        <div class="gallery-item">
-            <img src="images/customers/tees/t7.jpg" alt="Customer 6">
-        </div>
-
-         <div class="gallery-item">
-            <img src="images/customers/tees/t8.jpg" alt="Customer 6">
-        </div>
-
-        <div class="gallery-item">
-            <img src="images/customers/tees/t9.jpg" alt="Customer 6">
-        </div>
-        
-        <div class="gallery-item">
-            <img src="images/customers/tees/t10.jpg" alt="Customer 6">
-        </div>
-        
-        <div class="gallery-item">
-            <img src="images/customers/tees/t16.jpg" alt="Customer 6">
-        </div>
-        
-        <div class="gallery-item">
-            <img src="images/customers/tees/t17.jpg" alt="Customer 6">
-        </div>
-
-         <div class="gallery-item">
-            <img src="images/customers/tees/t20.jpg" alt="Customer 6">
-        </div>
-
-        
-<div class="gallery-item">
-            <img src="images/customers/hoodies/h1.jpg" alt="Customer 6">
-        </div>
-
-        <div class="gallery-item">
-            <img src="images/customers/hoodies/h4.jpg" alt="Customer 6">
-        </div>
-        
-        <div class="gallery-item">
-            <img src="images/customers/hoodies/h6.jpg" alt="Customer 6">
-        </div>
-        
-        <div class="gallery-item">
-            <img src="images/customers/hoodies/h7.jpg" alt="Customer 6">
-        </div>
-        
-        <div class="gallery-item">
-            <img src="images/customers/hoodies/h10.jpg" alt="Customer 6">
-        </div>
-        
-        <div class="gallery-item">
-            <img src="images/customers/hoodies/h12.jpg" alt="Customer 6">
-        </div>
-        
-        <div class="gallery-item">
-            <img src="images/customers/hoodies/h13.jpg" alt="Customer 6">
-        </div>
-
-         <div class="gallery-item">
-            <img src="images/customers/hoodies/h14.jpg" alt="Customer 6">
-        </div>
-
-        <div class="gallery-item">
-            <img src="images/customers/hoodies/h16.jpg" alt="Customer 6">
-        </div>
-        
-        <div class="gallery-item">
-            <img src="images/customers/hoodies/h17.jpg" alt="Customer 6">
-        </div>
-        
-        <div class="gallery-item">
-            <img src="images/customers/tracksuit/o1.jpg" alt="Customer 6">
-        </div>
-                    
-        <div class="gallery-item">
-            <img src="images/customers/tracksuit/o5.jpg" alt="Customer 6">
-        </div>
-
-        <div class="gallery-item">
-            <img src="images/customers/tracksuit/o2.jpg" alt="Customer 6">
-        </div> 
-        
-         <div class="gallery-item">
-            <img src="images/customers/tracksuit/t1.jpg" alt="Customer 6">
-        </div>
-        
-         <div class="gallery-item">
-            <img src="images/customers/tracksuit/t2.jpg" alt="Customer 6">
-        </div> 
-
-        <div class="gallery-item">
-            <img src="images/customers/tracksuit/t3.jpg" alt="Customer 6">
-        </div> 
-        
-        <div class="gallery-item">
-            <img src="images/customers/tracksuit/t6.jpg" alt="Customer 6">
-        </div> 
-        
-        <div class="gallery-item">
-            <img src="images/customers/tracksuit/t7.jpg" alt="Customer 6">
-        </div> 
-               
-    </div>
-
-</section>
-
-<section id="about">
-
-<u><h2 class="title">Our Story</h2></u>
-
-<div class="about">
-
-<img src="images/SSScartoon.jpg">
-
-<div>
-
-<p>
-SEASONS creates premium clothing inspired by the changing seasons and modern lifestyles.
-Our collections blend comfort, quality and timeless design so every piece feels as good as it looks.
-</p>
-
-<br>
-
-<p>
-Whether it's summer essentials, autumn layers, winter warmth or spring freshness,
-SEASONS is designed to fit every moment.
-</p>
-
-<br>
-
-<p>
-If you are interested in any of our products, kindly list the products you want and send a message
-to any of our social media pages and we will respond to you in no time. Thank You. 
-</p>
-
-
-<br>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="contact" id="contact">
-
-<u><h2 class="title">Contact Us</h2></u>
-
-<form>
-
-<input type="text" placeholder="Your Name">
-
-<input type="email" placeholder="Email">
-
-<textarea rows="5" placeholder="Message"></textarea>
-
-<button type="submit">Send Message</button type="submit">
-
-
-<br>
-<section>
-<div class="card">
-
-   <p><u>You can also contact us on:</u></p>
-
-    <ul class="contact-list">
-
-        <li>
-            <a href="https://wa.me/263779573033" target="_blank">
-                <i class="fab fa-whatsapp"></i>
-                WhatsApp: +263 77 957 3033
-            </a>
-        </li>
-
-        <li>
-            <a href="https://www.tiktok.com/@seasonsclothin" target="_blank">
-                <i class="fab fa-tiktok"></i>
-                TikTok: @seasonsclothin
-            </a>
-        </li>
-
-        <li>
-            <a href="https://www.instagram.com/sss_seasons/" target="_blank">
-                <i class="fab fa-instagram"></i>
-                Instagram: @sss_seasons
-            </a>
-        </li>
-
-        <li>
-            <a href="https://www.instagram.com/3easons_sss/" target="_blank">
-                <i class="fab fa-instagram"></i>
-                Instagram: @3easons_sss
-            </a>
-        </li>
-
-    </ul>
-</div>
-
-</form>
-
-</section>
-
-<section class="newsletter">
-
-<h2>Join the SEASONS Community</h2>
-
-<p>Get updates on new drops and exclusive offers.</p>
-
-<input type="email" placeholder="Your email">
-
-<button>Subscribe</button>
-
-</section>
-
-<footer>
-
-<div class="footer-container">
-
-<div class="footer-section">
-            <h3><u>Legal:</u></h3>
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="terms.html">Terms & Conditions</a>
-        </div>
-
-        <div class="footer-section">
-            <h3><u>Follow Us On:</u></h3>
-
-            <a href="https://www.instagram.com/sss_seasons/" target="_blank">
-                <i class="fab fa-instagram"></i> Instagram
-            </a>
-
-             <a href="https://www.instagram.com/3easons_sss/" target="_blank">
-                <i class="fab fa-instagram"></i> Instagram
-            </a>
-
-            <a href="https://www.tiktok.com/@seasonsclothin" target="_blank">
-                <i class="fab fa-tiktok"></i> TikTok
-            </a>
-
-            <a href="https://wa.me/263779573033" target="_blank">
-                <i class="fab fa-whatsapp"></i> WhatsApp
-            </a>
-
-        </div>
-
-    </div>
-    <hr>
-
-    <p class="copyright">
-        © 2026 SEASONS. All Rights Reserved.
-    </p>
-
-</footer>
-<div class="floating-social">
-
-    <a href="https://wa.me/263779573033" target="_blank" class="whatsapp" title="Chat on WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <a href="https://www.instagram.com/sss_seasons/" target="_blank" class="instagram" title="Instagram">
-        <i class="fab fa-instagram"></i>
-    </a>
-
-    <a href="https://www.instagram.com/3easons_sss/" target="_blank" class="instagram" title="Instagram">
-        <i class="fab fa-instagram"></i>
-    </a>
-
-    <a href="https://www.tiktok.com/@seasonsclothin" target="_blank" class="tiktok" title="TikTok">
-        <i class="fab fa-tiktok"></i>
-    </a>
-
-</div>
-<div id="lightbox" class="lightbox">
-    <span class="close">&times;</span>
-    <img class="lightbox-content" id="lightbox-img">
-</div>
 <script>
+// Lightbox Functionality
 function openLightbox(img) {
     document.getElementById("lightbox").style.display = "flex";
     document.getElementById("lightbox-img").src = img.src;
@@ -1056,37 +1033,166 @@ document.querySelector(".close").onclick = function () {
 };
 
 document.getElementById("lightbox").onclick = function(e) {
-    if (e.target === this) {
+    if (e.target === this || e.target.id === "lightbox-img") {
         this.style.display = "none";
     }
 };
-</script>
 
-<script>
+// Hero Carousel
 const slides = document.querySelectorAll(".slides");
-
 let currentSlide = 0;
 
 function showSlide(index){
-
-    slides.forEach(slide=>{
-        slide.classList.remove("active");
-    });
-
+    slides.forEach(slide => slide.classList.remove("active"));
     slides[index].classList.add("active");
 }
 
-setInterval(()=>{
+setInterval(() => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}, 4000);
 
-    currentSlide++;
+// Shopping Cart Management
+let cart = [];
 
-    if(currentSlide >= slides.length){
-        currentSlide = 0;
+function toggleCart(){
+    document.getElementById("cart-panel").classList.toggle("active");
+}
+
+function addToCart(name, price, image){
+    const existing = cart.find(item => item.name === name);
+    if(existing){
+        existing.quantity++;
+    } else {
+        cart.push({ name: name, price: price, image: image, quantity: 1 });
+    }
+    updateCart();
+    saveCart();
+    showToast("✅ Added to Cart");
+}
+
+function increase(index){
+    cart[index].quantity++;
+    updateCart();
+    saveCart();
+}
+
+function decrease(index){
+    cart[index].quantity--;
+    if(cart[index].quantity <= 0){
+        cart.splice(index, 1);
+    }
+    updateCart();
+    saveCart();
+}
+
+function removeItem(index){
+    cart.splice(index, 1);
+    updateCart();
+    saveCart();
+}
+
+function saveCart(){
+    localStorage.setItem("seasonsCart", JSON.stringify(cart));
+}
+
+function loadCart(){
+    let saved = localStorage.getItem("seasonsCart");
+    if(saved){
+        cart = JSON.parse(saved);
+        updateCart();
+    }
+}
+
+function showToast(message){
+    let toast = document.getElementById("toast");
+    toast.innerHTML = message;
+    toast.classList.add("show");
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2000);
+}
+
+function checkoutWhatsApp(){
+    if(cart.length === 0){
+        alert("Your cart is empty.");
+        return;
     }
 
-    showSlide(currentSlide);
+    let name = document.getElementById("customer-name").value;
+    let phone = document.getElementById("customer-phone").value;
+    let address = document.getElementById("customer-address").value;
 
-},4000);
+    let message = `Hello SEASONS!\n\nI'd like to place an order.\n--------------------------------\n\n`;
+    let total = 0;
+
+    cart.forEach(item => {
+        total += item.price * item.quantity;
+        message += `${item.quantity} × ${item.name}\n$${(item.price * item.quantity).toFixed(2)}\n\n`;
+    });
+
+    message += `--------------------------------\nTOTAL: $${total.toFixed(2)}\n\nCustomer Name: ${name}\nPhone: ${phone}\nDelivery Address: ${address}\n\nThank you!`;
+
+    let whatsapp = "https://wa.me/263775324744?text=" + encodeURIComponent(message);
+
+    showToast("Redirecting to WhatsApp...");
+    window.open(whatsapp, "_blank");
+
+    toggleCart();
+    cart = [];
+    updateCart();
+    saveCart();
+
+    document.getElementById("customer-name").value = "";
+    document.getElementById("customer-phone").value = "";
+    document.getElementById("customer-address").value = "";
+}
+
+function updateCart() {
+    const items = document.getElementById("cart-items");
+    const count = document.getElementById("cart-count");
+    const total = document.getElementById("cart-total");
+
+    items.innerHTML = "";
+
+    let sum = 0;
+    let itemCount = 0;
+
+    if (cart.length === 0) {
+        items.innerHTML = `<p class="empty-cart">Your cart is empty.</p>`;
+        count.textContent = "0";
+        total.textContent = "$0.00";
+        return;
+    }
+
+    cart.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        sum += itemTotal;
+        itemCount += item.quantity;
+
+        items.innerHTML += `
+            <div class="cart-item">
+                <img src="${item.image}" alt="${item.name}">
+                <div class="cart-details">
+                    <h4>${item.name}</h4>
+                    <p>$${item.price.toFixed(2)}</p>
+                    <div class="quantity">
+                        <button onclick="decrease(${index})">−</button>
+                        <span>${item.quantity}</span>
+                        <button onclick="increase(${index})">+</button>
+                    </div>
+                    <p><strong>Subtotal: $${itemTotal.toFixed(2)}</strong></p>
+                    <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                </div>
+            </div>
+        `;
+    });
+
+    count.textContent = itemCount;
+    total.textContent = "$" + sum.toFixed(2);
+}
+
+loadCart();
 </script>
 
 </body>
